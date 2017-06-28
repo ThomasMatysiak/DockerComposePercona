@@ -1,0 +1,27 @@
+version: '2'
+services:
+  apache:
+    build: https://github.com/ThomasMatysiak/DockerApache.git
+    ports:
+      - 80:80
+      - 443:443
+    links:
+      - php
+    volumes:
+      - ./error.log:/var/log/apache2/error.log
+      - ./html:/var/lib/wordpress/
+      - ./socks:/var/run/dock/
+  php:
+    build: https://github.com/ThomasMatysiak/PhpDocker.git
+    environment:
+      - PHP_VERSION=7.0.19
+    links:
+      - percona
+    volumes:
+      - ./php-fpm.log:/var/log/php-fpm.log
+      - ./html:/var/lib/wordpress/
+      - ./socks:/var/run/dock/
+  percona:
+    build: https://github.com/ThomasMatysiak/PerconaDocker.git
+    environment:
+      - PERCONA_VERSION=5.7

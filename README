@@ -1,0 +1,7 @@
+Pour compiler :
+docker-compose build
+
+Pour lancer:
+docker compose up -d
+
+Accessible au port 80 et 443 sur /wp
